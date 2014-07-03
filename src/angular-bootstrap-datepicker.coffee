@@ -7,9 +7,7 @@ dp.directive 'ngDatepicker', ->
     ngOptions: '='
     ngModel: '='
   template: """
-            <div class="input-append date">
-              <input type="text"><span class="add-on"><i class="icon-th"></i></span>
-            </div>
+              <input type="text">
             """
   link: (scope, element)->
     scope.inputHasFocus = false
