@@ -19,7 +19,7 @@
     "bootstrap" : ">=2.0.4 <3.0"
   },
   "devDependencies": {
-    "bootstrap-datepicker": "1.2.0",
+    "bootstrap-datepicker": ">=1.2.0",
     "angular": "1.0.8",
     "jasmine-jquery": "1.5.91",
     "angular-mocks": "1.0.8"
