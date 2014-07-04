@@ -2510,10 +2510,8 @@ dp.directive('ngDatepicker', function() {
         format = scope.ngOptions.format || defaultFormat;
         defaultLanguage = $.fn.datepicker.defaults.language;
         language = scope.ngOptions.language || defaultLanguage;
-        return scope.$apply(function() {
-          return scope.ngModel = $.fn.datepicker.DPGlobal.formatDate(e.date, format, language);
-        });
-      });
+        return scope.$apply(function() {});
+      }, e.date.setDate(e.date.getDate() + 1), scope.ngModel = $.fn.datepicker.DPGlobal.formatDate(e.date, format, language));
       element.find('input').on('focus', function() {
         return scope.inputHasFocus = true;
       }).on('blur', function() {
