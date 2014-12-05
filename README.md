@@ -14,7 +14,7 @@ A more dynamic [demo](http://eternicode.github.io/bootstrap-datepicker/) of all 
 
 Installation is easy, jQuery, AngularJS and Bootstrap's JS/CSS are required.
 You can download angular-bootstrap-datepicker via bower:
-`bower install angular-bootstrap-datepicker`
+`bower install https://github.com/rbatllet/angular-bootstrap-datepicker.git`
 
 When you are done downloading all the dependencies and project files the only remaining part is to add dependencies as an AngularJS module:
 
@@ -24,13 +24,13 @@ angular.module('myModule', ['ng-bootstrap-datepicker']);
 
 You also need to include these files:
 ```html
-<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-<link rel="stylesheet" href="angular-bootstrap-datepicker.css" />
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.css" />
 
-<script src="jquery.js"></script>
-<script src="bootstrap/js/bootstrap.js"></script>
-<script src="angular.js"></script>
-<script src="angular-bootstrap-datepicker.js" charset="utf-8"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.js" charset="utf-8"></script>
 ```
 
 Make sure you use `charset="utf-8"` in your script tag if your browser (or those of your users) is displaying characters wrong when using another language.

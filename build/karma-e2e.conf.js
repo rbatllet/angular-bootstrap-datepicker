@@ -14,7 +14,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/jquery/jquery.js',
+      'bower_components/jquery/dist/jquery.js',
       'test/system/jQueryFnDsl.js',
       'test/system/**/*.coffee'
     ],

@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Angular Bootstrap Datepicker Demo</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="angular-bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../dist/angular-bootstrap-datepicker.css" />
 </head>
 <body data-ng-app="demo">
     <div>
@@ -13,10 +13,10 @@
         </div>
     </div>
 
-    <script src="jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.js"></script>
-    <script src="angular.js"></script>
-    <script src="angular-bootstrap-datepicker.js" charset="utf-8"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../dist/angular-bootstrap-datepicker.js" charset="utf-8"></script>
     <script type="application/javascript">
         app = angular.module('demo', ['ng-bootstrap-datepicker']);
 
@@ -24,8 +24,8 @@
             $scope.datepickerOptions = {
                 format: 'yyyy-mm-dd',
                 language: 'fr',
-                startDate: "2012-10-01",
-                endDate: "2012-10-31",
+                startDate: "2014-10-01",
+                endDate: "2014-10-31",
                 autoclose: true,
                 weekStart: 0
             }
