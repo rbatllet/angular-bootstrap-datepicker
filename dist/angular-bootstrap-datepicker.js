@@ -237,9 +237,9 @@
 				return (/^auto|left|right|top|bottom$/).test(word);
 			});
 			o.orientation = {x: 'auto', y: 'auto'};
-			if (!_plc || _plc === 'auto')
+			if (!_plc || _plc === 'auto') {
 				; // no action
-			else if (plc.length === 1){
+			} else if (plc.length === 1){
 				switch (plc[0]){
 					case 'top':
 					case 'bottom':
@@ -2510,12 +2510,18 @@ dp.directive('ngDatepicker', function() {
         format = scope.ngOptions.format || defaultFormat;
         defaultLanguage = $.fn.datepicker.defaults.language;
         language = scope.ngOptions.language || defaultLanguage;
-        return scope.$apply(function() {});
-      }, e.date.setDate(e.date.getDate() + 1), scope.ngModel = $.fn.datepicker.DPGlobal.formatDate(e.date, format, language));
+        return scope.$apply(function() {
+			if (e.date === undefined) {
+				e.date = new Date();
+			}
+			e.date.setDate(e.date.getDate() + 1);
+			scope.ngModel = $.fn.datepicker.DPGlobal.formatDate(e.date, format, language);
+		});
+      });
       element.find('input').on('focus', function() {
-        return scope.inputHasFocus = true;
+		return scope.inputHasFocus = true;
       }).on('blur', function() {
-        return scope.inputHasFocus = false;
+		return scope.inputHasFocus = false;
       });
       return scope.$watch('ngModel', function(newValue) {
         if (!scope.inputHasFocus) {
