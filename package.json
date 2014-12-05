@@ -1,6 +1,6 @@
 {
   "name": "angular-datepicker",
-  "version": "0.4.1.1",
+  "version": "0.4.2",
   "description": "Angular Boostrap Datepicker based on https://github.com/eternicode/bootstrap-datepicker",
   "main": "angular-datepicker.js",
   "directories": {
@@ -26,6 +26,7 @@
     "grunt-contrib-coffee": "^0.12.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-contrib-uglify": "^0.6.0"
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-cssmin": "^0.10.0"
   }
 }

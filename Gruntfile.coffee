@@ -40,7 +40,13 @@ module.exports = (grunt) ->
         files: 'src/**/*.coffee'
         tasks: ['coffee:compile', 'concat', 'uglify:main']
 
+    cssmin:
+        dist:
+          files:
+            'dist/angular-bootstrap-datepicker.min.css': ['dist/angular-bootstrap-datepicker.css']
+
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
+  grunt.loadNpmTasks 'grunt-contrib-cssmin'
