@@ -2513,15 +2513,19 @@ dp.directive('ngDatepicker', function() {
         return scope.$apply(function() {
 			if (e.date === undefined) {
 				e.date = new Date();
+				e.date.setDate(e.date.getDate());
+			} else {
+				e.date.setDate(e.date.getDate() + 1);
 			}
-			e.date.setDate(e.date.getDate() + 1);
 			scope.ngModel = $.fn.datepicker.DPGlobal.formatDate(e.date, format, language);
 		});
       });
       element.find('input').on('focus', function() {
-		return scope.inputHasFocus = true;
+		scope.inputHasFocus = true;
+		return true;
       }).on('blur', function() {
-		return scope.inputHasFocus = false;
+		scope.inputHasFocus = false;
+		return false;
       });
       return scope.$watch('ngModel', function(newValue) {
         if (!scope.inputHasFocus) {
