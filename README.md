@@ -50,4 +50,4 @@ To use the directive, use the following code and compatible with Angular 1.4:
 `ng-model` : Variable of the controller scope to store the date. The date is currently store as a string, formatted according to the one set in date-options.
 
 
-For a working example, see https://github.com/cletourneau/angular-bootstrap-datepicker/blob/master/example/demo.html
+For a working example, see https://github.com/rbatllet/angular-bootstrap-datepicker/blob/master/example/demo.html
