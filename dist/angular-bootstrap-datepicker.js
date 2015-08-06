@@ -2498,18 +2498,18 @@ dp.directive('ngDatepicker', function() {
     restrict: 'A',
     replace: true,
     scope: {
-      ngOptions: '=',
+      dateOptions: '=',
       ngModel: '='
     },
     template: "<input type=\"text\">",
     link: function(scope, element) {
       scope.inputHasFocus = false;
-      element.datepicker(scope.ngOptions).on('changeDate', function(e) {
+      element.datepicker(scope.dateOptions).on('changeDate', function(e) {
         var defaultFormat, defaultLanguage, format, language;
         defaultFormat = $.fn.datepicker.defaults.format;
-        format = scope.ngOptions.format || defaultFormat;
+        format = scope.dateOptions.format || defaultFormat;
         defaultLanguage = $.fn.datepicker.defaults.language;
-        language = scope.ngOptions.language || defaultLanguage;
+        language = scope.dateOptions.language || defaultLanguage;
         return scope.$apply(function() {
 			if (e.date === undefined) {
 				e.date = new Date();
