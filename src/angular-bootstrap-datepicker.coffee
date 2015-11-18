@@ -18,10 +18,9 @@ dp.directive 'ngDatepicker', ->
       format = scope.dateOptions.format || defaultFormat
       defaultLanguage = $.fn.datepicker.defaults.language
       language = scope.dateOptions.language || defaultLanguage
-			
+
       scope.$apply ->
-				e.date.setDate e.date.getDate() + 1
-				scope.ngModel = $.fn.datepicker.DPGlobal.formatDate(e.date, format, language)
+        scope.ngModel = if e != undefined then e.target.value else ''
     )
 
     element.find('input').on('focus', ->
