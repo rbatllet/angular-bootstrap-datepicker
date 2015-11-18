@@ -5,7 +5,8 @@
   "main": [
     "dist/angular-bootstrap-datepicker.js",
     "dist/angular-bootstrap-datepicker.min.js",
-    "dist/angular-bootstrap-datepicker.css"
+    "dist/angular-bootstrap-datepicker.css",
+    "dist/angular-bootstrap-datepicker.min.css"
   ],
   "authors": [
     "Carl Létourneau, R. Batlle"
@@ -14,7 +15,8 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "test"
+    "test",
+    "build"
   ],
   "dependencies": {
     "jquery": "^1.11.1",
