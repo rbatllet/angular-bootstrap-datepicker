@@ -15,12 +15,12 @@ module.exports = (grunt) ->
     concat:
       js:
         src: ['bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
-              'bower_components/bootstrap-datepicker/js/locales/*.js',
-              'js/src.js']
+          'bower_components/bootstrap-datepicker/js/locales/*.js',
+          'js/src.js']
 
         dest: 'dist/angular-bootstrap-datepicker.js'
       css:
-        src: ['bower_components/bootstrap-datepicker/css/datepicker.css']
+        src: ['bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css']
         dest: 'dist/angular-bootstrap-datepicker.css'
 
     uglify:
@@ -41,9 +41,9 @@ module.exports = (grunt) ->
         tasks: ['coffee:compile', 'concat', 'uglify:main']
 
     cssmin:
-        dist:
-          files:
-            'dist/angular-bootstrap-datepicker.min.css': ['dist/angular-bootstrap-datepicker.css']
+      dist:
+        files:
+          'dist/angular-bootstrap-datepicker.min.css': ['dist/angular-bootstrap-datepicker.css']
 
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
