@@ -1,4 +1,6 @@
-# angular-bootstrap-datepicker - [AngularJS](http://angularjs.org/) directives for the [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker)
+# angular-bootstrap-datepicker
+
+[AngularJS](http://angularjs.org/) directives for the [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker)
 
 At the moment, only the ["Component"](http://eternicode.github.io/bootstrap-datepicker/?markup=component) type is supported.
 
@@ -6,7 +8,7 @@ At the moment, only the ["Component"](http://eternicode.github.io/bootstrap-date
 
 ## Demo
 
-Here's a working [jsfiddle](http://jsfiddle.net/rbatllet/jcavrvbv/)
+Here's a working [jsfiddle](http://jsfiddle.net/rbatllet/8Lxat9ov/)
 A more dynamic [demo](http://eternicode.github.io/bootstrap-datepicker/) of all the options is available for the original bootstrap-datepicker.
 
 
@@ -14,7 +16,7 @@ A more dynamic [demo](http://eternicode.github.io/bootstrap-datepicker/) of all 
 
 Installation is easy, jQuery, AngularJS and Bootstrap's JS/CSS are required.
 You can download angular-bootstrap-datepicker via bower:
-`bower install https://github.com/rbatllet/angular-bootstrap-datepicker.git`
+`bower install https://github.com/rbatllet/angular-bootstrap-datepicker.git -save`
 
 When you are done downloading all the dependencies and project files the only remaining part is to add dependencies as an AngularJS module:
 
