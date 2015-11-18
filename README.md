@@ -6,7 +6,7 @@ At the moment, only the ["Component"](http://eternicode.github.io/bootstrap-date
 
 ## Demo
 
-Here's a working [jsfiddle](http://jsfiddle.net/cletourneau/kGGCZ/)
+Here's a working [jsfiddle](http://jsfiddle.net/rbatllet/jcavrvbv/)
 A more dynamic [demo](http://eternicode.github.io/bootstrap-datepicker/) of all the options is available for the original bootstrap-datepicker.
 
 
@@ -24,13 +24,13 @@ angular.module('myModule', ['ng-bootstrap-datepicker']);
 
 You also need to include these files:
 ```html
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-<link rel="stylesheet" href="bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.css" />
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.min.css" />
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.js" charset="utf-8"></script>
+<script src="bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.min.js" charset="utf-8"></script>
 ```
 
 Make sure you use `charset="utf-8"` in your script tag if your browser (or those of your users) is displaying characters wrong when using another language.
