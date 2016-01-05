@@ -46,5 +46,3 @@ describe 'angular-bootstrap-datepicker', ->
 
     it 'should set the correct i class', ->
       expect(@icons.eq(0)).toHaveClass('icon-th')
-
-
