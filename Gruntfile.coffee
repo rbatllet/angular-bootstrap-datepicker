@@ -45,6 +45,7 @@ module.exports = (grunt) ->
         files:
           'dist/angular-bootstrap-datepicker.min.css': ['dist/angular-bootstrap-datepicker.css']
 
+  grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
