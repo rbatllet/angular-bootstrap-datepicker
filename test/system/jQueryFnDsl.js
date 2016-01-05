@@ -22,9 +22,9 @@ angular.scenario.dsl('keyboard', function() {
             e.altKey = alt;
             e.ctrlKey = ctrl;
             e.shiftKey = shift;
-            if (selector == null) selector = '*:focus';
+            if (selector === null) selector = '*:focus';
             var j = jQuery(selector);
-            if (j == null) j = jQuery('body');
+            if (j === null) j = jQuery('body');
             j.trigger(e);
             done();
         });
