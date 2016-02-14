@@ -13,7 +13,6 @@ dp.directive 'ngDatepicker', ->
     scope.inputHasFocus = false
 
     element.datepicker(scope.dateOptions).on('changeDate', (e)->
-
       defaultFormat = $.fn.datepicker.defaults.format
       format = scope.dateOptions.format || defaultFormat
       defaultLanguage = $.fn.datepicker.defaults.language
