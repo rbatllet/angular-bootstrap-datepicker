@@ -1,6 +1,6 @@
 {
   "name": "angular-datepicker",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Angular Boostrap Datepicker based on https://github.com/eternicode/bootstrap-datepicker",
   "main": "angular-datepicker.js",
   "directories": {
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Carl Letourneau, R. Batlle",
+  "author": "Carl Letourneau, R. Batlle, Konstantin Popov",
   "license": "Apache-2.0",
   "devDependencies": {
     "coffee-script": "^1.10.0",

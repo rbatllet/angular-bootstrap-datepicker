@@ -1,6 +1,6 @@
 {
   "name": "angular-bootstrap-datepicker",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Angular Boostrap Datepicker based on https://github.com/eternicode/bootstrap-datepicker",
   "license": "Apache-2.0",
   "main": [
@@ -8,7 +8,7 @@
     "dist/angular-bootstrap-datepicker.min.css"
   ],
   "authors": [
-    "Carl Létourneau, R. Batlle"
+    "Carl Létourneau, R. Batlle, Konstantin Popov"
   ],
   "ignore": [
     "**/.*",
