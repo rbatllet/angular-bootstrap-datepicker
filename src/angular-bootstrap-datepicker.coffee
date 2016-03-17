@@ -5,7 +5,7 @@ dp.directive 'ngDatepicker', ->
   replace: true
   scope:
     dateOptions: '='
-    ngModel: '='
+    model: '='
   template: """
               <input type="text">
             """
@@ -19,7 +19,7 @@ dp.directive 'ngDatepicker', ->
       language = scope.dateOptions.language || defaultLanguage
 
       scope.$apply ->
-        scope.ngModel = if e != undefined then e.target.value else ''
+        scope.model = if e != undefined then e.target.value else ''
     )
 
     element.find('input').on('focus', ->
@@ -28,6 +28,6 @@ dp.directive 'ngDatepicker', ->
       scope.inputHasFocus = false
     )
 
-    scope.$watch 'ngModel', (newValue)->
+    scope.$watch 'model', (newValue)->
       if not scope.inputHasFocus
         element.datepicker('update', newValue)

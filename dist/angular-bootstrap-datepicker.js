@@ -3301,7 +3301,7 @@ dp.directive('ngDatepicker', function() {
     replace: true,
     scope: {
       dateOptions: '=',
-      ngModel: '='
+      model: '='
     },
     template: "<input type=\"text\">",
     link: function(scope, element) {
@@ -3313,7 +3313,7 @@ dp.directive('ngDatepicker', function() {
         defaultLanguage = $.fn.datepicker.defaults.language;
         language = scope.dateOptions.language || defaultLanguage;
         return scope.$apply(function() {
-          return scope.ngModel = e !== void 0 ? e.target.value : '';
+          return scope.model = e !== void 0 ? e.target.value : '';
         });
       });
       element.find('input').on('focus', function() {
@@ -3321,7 +3321,7 @@ dp.directive('ngDatepicker', function() {
       }).on('blur', function() {
         return scope.inputHasFocus = false;
       });
-      return scope.$watch('ngModel', function(newValue) {
+      return scope.$watch('model', function(newValue) {
         if (!scope.inputHasFocus) {
           return element.datepicker('update', newValue);
         }
