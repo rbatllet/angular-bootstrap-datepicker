@@ -3321,6 +3321,20 @@ dp.directive('ngDatepicker', function() {
       }).on('blur', function() {
         return scope.inputHasFocus = false;
       });
+      element.bind('blur', function(e) {
+        var currentValue;
+        currentValue = element.val();
+        if (moment(currentValue).isValid() || currentValue === '') {
+          return scope.$apply(function() {
+            return scope.model = e !== void 0 ? currentValue : '';
+          });
+        } else {
+          element.val('');
+          return scope.$apply(function() {
+            return scope.model = '';
+          });
+        }
+      });
       return scope.$watch('model', function(newValue) {
         if (!scope.inputHasFocus) {
           return element.datepicker('update', newValue);

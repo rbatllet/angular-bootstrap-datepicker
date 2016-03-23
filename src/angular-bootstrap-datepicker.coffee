@@ -28,6 +28,17 @@ dp.directive 'ngDatepicker', ->
       scope.inputHasFocus = false
     )
 
+    element.bind('blur', (e)->
+      currentValue = element.val()
+      if moment(currentValue).isValid() or currentValue == ''
+        scope.$apply ->
+          scope.model = if e != undefined then currentValue else ''
+      else
+        element.val('')
+        scope.$apply ->
+          scope.model = ''
+    )
+
     scope.$watch 'model', (newValue)->
       if not scope.inputHasFocus
         element.datepicker('update', newValue)
