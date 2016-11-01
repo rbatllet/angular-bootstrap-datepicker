@@ -108,13 +108,12 @@
 		this.focusDate = null;
 
 		this.element = $(element);
+		this.isInline = false;
 		this.isInput = this.element.is('input');
-		this.inputField = this.isInput ? this.element : this.element.find('input');
 		this.component = this.element.hasClass('date') ? this.element.find('.add-on, .input-group-addon, .btn') : false;
-		this.hasInput = this.component && this.inputField.length;
+		this.hasInput = this.component && this.element.find('input').length;
 		if (this.component && this.component.length === 0)
 			this.component = false;
-		this.isInline = !this.component && this.element.is('div');
 
 		this.picker = $(DPGlobal.template);
 
@@ -286,9 +285,9 @@
 
 			o.datesDisabled = o.datesDisabled||[];
 			if (!$.isArray(o.datesDisabled)) {
-				o.datesDisabled = [
-					o.datesDisabled
-				];
+				var datesDisabled = [];
+				datesDisabled.push(DPGlobal.parseDate(o.datesDisabled, format, o.language, o.assumeNearbyYear));
+				o.datesDisabled = datesDisabled;
 			}
 			o.datesDisabled = $.map(o.datesDisabled,function(d){
 				return DPGlobal.parseDate(d, format, o.language, o.assumeNearbyYear);
@@ -386,17 +385,19 @@
             else if (this.component && this.hasInput) { // component: input + button
                 this._events = [
                     // For components that are not readonly, allow keyboard nav
-                    [this.inputField, events],
+                    [this.element.find('input'), events],
                     [this.component, {
                         click: $.proxy(this.show, this)
                     }]
                 ];
             }
+			else if (this.element.is('div')){  // inline datepicker
+				this.isInline = true;
+			}
 			else {
 				this._events = [
 					[this.element, {
-						click: $.proxy(this.show, this),
-						keydown: $.proxy(this.keydown, this)
+						click: $.proxy(this.show, this)
 					}]
 				];
 			}
@@ -439,7 +440,7 @@
 							this.element.find(e.target).length ||
 							this.picker.is(e.target) ||
 							this.picker.find(e.target).length ||
-							this.isInline
+							this.picker.hasClass('datepicker-inline')
 						)){
 							this.hide();
 						}
@@ -486,7 +487,8 @@
 		},
 
 		show: function(){
-			if (this.inputField.prop('disabled') || (this.inputField.prop('readonly') && this.o.enableOnReadonly === false))
+      var element = this.component ? this.element.find('input') : this.element;
+			if (element.attr('readonly') && this.o.enableOnReadonly === false)
 				return;
 			if (!this.isInline)
 				this.picker.appendTo(this.o.container);
@@ -501,7 +503,9 @@
 		},
 
 		hide: function(){
-			if (this.isInline || !this.picker.is(':visible'))
+			if (this.isInline)
+				return this;
+			if (!this.picker.is(':visible'))
 				return this;
 			this.focusDate = null;
 			this.picker.hide().detach();
@@ -509,7 +513,13 @@
 			this.viewMode = this.o.startView;
 			this.showMode();
 
-			if (this.o.forceParse && this.inputField.val())
+			if (
+				this.o.forceParse &&
+				(
+					this.isInput && this.element.val() ||
+					this.hasInput && this.element.find('input').val()
+				)
+			)
 				this.setValue();
 			this._trigger('hide');
 			return this;
@@ -581,8 +591,15 @@
 		},
 
 		clearDates: function(){
-			if (this.inputField) {
-				this.inputField.val('');
+			var element;
+			if (this.isInput) {
+				element = this.element;
+			} else if (this.component) {
+				element = this.element.find('input');
+			}
+
+			if (element) {
+				element.val('');
 			}
 
 			this.update();
@@ -614,7 +631,14 @@
 
 		setValue: function(){
 			var formatted = this.getFormattedDate();
-			this.inputField.val(formatted);
+			if (!this.isInput){
+				if (this.component){
+					this.element.find('input').val(formatted);
+				}
+			}
+			else {
+				this.element.val(formatted);
+			}
 			return this;
 		},
 
@@ -774,7 +798,7 @@
 			else {
 				dates = this.isInput
 						? this.element.val()
-						: this.element.data('date') || this.inputField.val();
+						: this.element.data('date') || this.element.find('input').val();
 				if (dates && this.o.multidate)
 					dates = dates.split(this.o.multidateSeparator);
 				else
@@ -882,12 +906,9 @@
 			}
 			if (this.dates.contains(date) !== -1)
 				cls.push('active');
-			if (!this.dateWithinRange(date)){
+			if (!this.dateWithinRange(date) || this.dateIsDisabled(date)){
 				cls.push('disabled');
 			}
-			if (this.dateIsDisabled(date)){
-				cls.push('disabled', 'disabled-date');	
-			} 
 			if ($.inArray(date.getUTCDay(), this.o.daysOfWeekHighlighted) !== -1){
 				cls.push('highlighted');
 			}
@@ -1025,6 +1046,7 @@
 							// Calendar week: ms between thursdays, div ms per day, div 7 days
 							calWeek =  (th - yth) / 864e5 / 7 + 1;
 						html.push('<td class="cw">'+ calWeek +'</td>');
+
 					}
 				}
 				clsName = this.getClassNames(prevMonth);
@@ -1046,14 +1068,7 @@
 						tooltip = before.tooltip;
 				}
 
-				//Check if uniqueSort exists (supported by jquery >=1.12 and >=2.2)
-				//Fallback to unique function for older jquery versions
-				if ($.isFunction($.uniqueSort)) {
-					clsName = $.uniqueSort(clsName);
-				} else {
-					clsName = $.unique(clsName);
-				}
-
+				clsName = $.unique(clsName);
 				html.push('<td class="'+clsName.join(' ')+'"' + (tooltip ? ' title="'+tooltip+'"' : '') + '>'+prevMonth.getUTCDate() + '</td>');
 				tooltip = null;
 				if (prevMonth.getUTCDay() === this.o.weekEnd){
@@ -1213,7 +1228,7 @@
 			}
 
 			// Clicked on today button
-			if (target.hasClass('today') && !target.hasClass('day')){
+			if (target.hasClass('today')){
 				this.showMode(-2);
 				this._setDate(UTCToday(), this.o.todayBtn === 'linked' ? null : 'view');
 			}
@@ -1356,8 +1371,15 @@
 			if (!which || which !== 'view') {
 				this._trigger('changeDate');
 			}
-			if (this.inputField){
-				this.inputField.change();
+			var element;
+			if (this.isInput){
+				element = this.element;
+			}
+			else if (this.component){
+				element = this.element.find('input');
+			}
+			if (element){
+				element.change();
 			}
 			if (this.o.autoclose && (!which || which === 'date')){
 				this.hide();
@@ -1558,8 +1580,15 @@
 					this._trigger('changeDate');
 				else
 					this._trigger('clearDate');
-				if (this.inputField){
-					this.inputField.change();
+				var element;
+				if (this.isInput){
+					element = this.element;
+				}
+				else if (this.component){
+					element = this.element.find('input');
+				}
+				if (element){
+					element.change();
 				}
 			}
 		},
@@ -2039,7 +2068,7 @@
 	};
 	DPGlobal.template = '<div class="datepicker">'+
 							'<div class="datepicker-days">'+
-								'<table class="table-condensed">'+
+								'<table class=" table-condensed">'+
 									DPGlobal.headTemplate+
 									'<tbody></tbody>'+
 									DPGlobal.footTemplate+
@@ -2088,7 +2117,7 @@
 
 	/* DATEPICKER VERSION
 	 * =================== */
-	$.fn.datepicker.version = '1.6.4';
+	$.fn.datepicker.version = '1.6.0';
 
 	/* DATEPICKER DATA-API
 	* ================== */
@@ -2694,7 +2723,7 @@
 		daysShort: ["Жек", "Дүй", "Сей", "Сәр", "Бей", "Жұм", "Сен"],
 		daysMin: ["Жк", "Дс", "Сс", "Ср", "Бс", "Жм", "Сн"],
 		months: ["Қаңтар", "Ақпан", "Наурыз", "Сәуір", "Мамыр", "Маусым", "Шілде", "Тамыз", "Қыркүйек", "Қазан", "Қараша", "Желтоқсан"],
-		monthsShort: ["Қаң", "Ақп", "Нау", "Сәу", "Мам", "Мау", "Шіл", "Там", "Қыр", "Қаз", "Қар", "Жел"],
+		monthsShort: ["Қаң", "Ақп", "Нау", "Сәу", "Мамыр", "Мау", "Шлд", "Тмз", "Қыр", "Қзн", "Қар", "Жел"],
 		today: "Бүгін",
 		weekStart: 1
 	};
