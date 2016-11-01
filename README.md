@@ -6,6 +6,8 @@ At the moment, only the ["Component"](http://eternicode.github.io/bootstrap-date
 
 ***
 
+This is a fork from [rbatllet/angular-bootstrap-datepicker](https://github.com/rbatllet/angular-bootstrap-datepicker) to fix a problem with isolated scope inheritance of the ngModel.
+
 ## Demo
 
 Here's a working [jsfiddle](http://jsfiddle.net/rbatllet/8Lxat9ov/)
@@ -16,7 +18,7 @@ A more dynamic [demo](http://eternicode.github.io/bootstrap-datepicker/) of all 
 
 Installation is easy, jQuery, AngularJS and Bootstrap's JS/CSS are required.
 You can download angular-bootstrap-datepicker via bower:
-`bower install https://github.com/rbatllet/angular-bootstrap-datepicker.git -save`
+`bower install https://github.com/kipopov/angular-bootstrap-datepicker.git -save`
 
 When you are done downloading all the dependencies and project files the only remaining part is to add dependencies as an AngularJS module:
 
@@ -42,14 +44,14 @@ Make sure you use `charset="utf-8"` in your script tag if your browser (or those
 To use the directive, use the following code and compatible with Angular 1.4:
 
 ```html
-<input type="text" ng-datepicker date-options="datepickerOptions" ng-model="date">
+<input type="text" ng-datepicker date-options="datepickerOptions" model="date">
 ```
 
 `ng-datepicker` : Indicates you want your input as a date picker.
 
 `date-options` : Object of the controller scope containing the [options](http://bootstrap-datepicker.readthedocs.org/en/latest/options.html) for your date picker.
 
-`ng-model` : Variable of the controller scope to store the date. The date is currently store as a string, formatted according to the one set in date-options.
+`model` : Variable of the controller scope to store the date. The date is currently store as a string, formatted according to the one set in date-options.
 
 
 For a working example, see https://github.com/rbatllet/angular-bootstrap-datepicker/blob/master/example/demo.html
