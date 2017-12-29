@@ -12,22 +12,22 @@
   "author": "Carl Letourneau, R. Batlle",
   "license": "Apache-2.0",
   "devDependencies": {
-    "coffee-script": "^1.10.0",
+    "coffeescript": "^2.1.0",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-coffee": "^2.0.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-cssmin": "^1.0.1",
-    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-cssmin": "^2.2.1",
+    "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "jasmine-core": "^2.4.1",
-    "karma": "^1.1.2",
+    "jasmine-core": "^2.8.0",
+    "karma": "^2.0.0",
     "karma-coffee-preprocessor": "^1.0.1",
-    "karma-html2js-preprocessor": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
+    "karma-html2js-preprocessor": "^1.1.0",
+    "karma-jasmine": "^1.1.1",
     "karma-ng-scenario": "^1.0.0",
-    "phantomjs-prebuilt": "^2.1.11"
+    "phantomjs-prebuilt": "^2.1.16"
   }
 }
