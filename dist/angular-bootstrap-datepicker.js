@@ -18,8 +18,8 @@
  * ========================================================= */
 
 (function(factory){
-    if (typeof define === "function" && define.amd) {
-        define(["jquery"], factory);
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
     } else if (typeof exports === 'object') {
         factory(require('jquery'));
     } else {
@@ -1154,10 +1154,6 @@
 				nextIsDisabled,
 				factor = 1;
 			switch (this.viewMode){
-				case 0:
-					prevIsDisabled = year <= startYear && month <= startMonth;
-					nextIsDisabled = year >= endYear && month >= endMonth;
-					break;
 				case 4:
 					factor *= 10;
 					/* falls through */
@@ -1168,8 +1164,12 @@
 					factor *= 10;
 					/* falls through */
 				case 1:
-					prevIsDisabled = Math.floor(year / factor) * factor <= startYear;
-					nextIsDisabled = Math.floor(year / factor) * factor + factor >= endYear;
+					prevIsDisabled = Math.floor(year / factor) * factor < startYear;
+					nextIsDisabled = Math.floor(year / factor) * factor + factor > endYear;
+					break;
+				case 0:
+					prevIsDisabled = year <= startYear && month < startMonth;
+					nextIsDisabled = year >= endYear && month > endMonth;
 					break;
 			}
 
@@ -1543,6 +1543,11 @@
 			});
 			$.each(this.pickers, function(i, p){
 				p.setRange(range);
+			});
+		},
+		clearDates: function(){
+			$.each(this.pickers, function(i, p){
+				p.clearDates();
 			});
 		},
 		dateUpdated: function(e){
@@ -2011,7 +2016,7 @@
 
 	/* DATEPICKER VERSION
 	 * =================== */
-	$.fn.datepicker.version = '1.7.1';
+	$.fn.datepicker.version = '1.8.0';
 
 	$.fn.datepicker.deprecated = function(msg){
 		var console = window.console;
@@ -2045,6 +2050,7 @@
 /**
  * Canadian English translation for bootstrap-datepicker
  * Mike Nacey <mnacey@gmail.com>
+ * DEPRECATED: This filename doesn't follow the convention, use bootstrap-datepicker.en-CA.js instead
  */
 ;(function($){
 	$.fn.datepicker.dates['en-CA'] = {
@@ -2059,6 +2065,9 @@
 		weekStart: 0,
 		format: "yyyy-mm-dd"
 	};
+
+	$.fn.datepicker.deprecated('This filename doesn\'t follow the convention, use bootstrap-datepicker.en-CA.js instead.');
+
 }(jQuery));
 
 /**
@@ -2211,7 +2220,7 @@
 		clear: "Vymazat",
 		monthsTitle: "Měsíc",
 		weekStart: 1,
-		format: "dd.m.yyyy"
+		format: "dd.mm.yyyy"
 	};
 }(jQuery));
 
@@ -2245,7 +2254,8 @@
 		today: "I Dag",
 		weekStart: 1,
 		clear: "Nulstil",
-        format: "dd/mm/yyyy"
+        format: "dd/mm/yyyy",
+        monthsTitle:"Måneder"
 	};
 }(jQuery));
 
@@ -2301,6 +2311,25 @@
 		clear: "Clear",
 		weekStart: 1,
 		format: "d/mm/yyyy"
+	};
+}(jQuery));
+
+/**
+ * Canadian English translation for bootstrap-datepicker
+ * Mike Nacey <mnacey@gmail.com>
+ */
+;(function($){
+	$.fn.datepicker.dates['en-CA'] = {
+		days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+		daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+		daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+		months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+		monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		today: "Today",
+		monthsTitle: "Months",
+		clear: "Clear",
+		weekStart: 0,
+		format: "yyyy-mm-dd"
 	};
 }(jQuery));
 
@@ -2879,6 +2908,7 @@
         daysMin: ["Sv", "Pr", "Ot", "Tr", "Ce", "Pk", "Se"],
         months: ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"],
         monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mai", "Jūn", "Jūl", "Aug", "Sep", "Okt", "Nov", "Dec"],
+        monthsTitle: "Mēneši",
         today: "Šodien",
         clear: "Nodzēst",
         weekStart: 1
@@ -2954,22 +2984,6 @@
 }(jQuery));
 
 /**
- * Norwegian (bokmål) translation for bootstrap-datepicker
- * Fredrik Sundmyhr <http://github.com/fsundmyhr>
- */
-;(function($){
-	$.fn.datepicker.dates['nb'] = {
-		days: ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"],
-		daysShort: ["Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"],
-		daysMin: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"],
-		months: ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"],
-		monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"],
-		today: "I Dag",
-		format: "dd.mm.yyyy"
-	};
-}(jQuery));
-
-/**
  * Belgium-Dutch translation for bootstrap-datepicker
  * Julien Poulin <poulin_julien@hotmail.com>
  */
@@ -3008,16 +3022,18 @@
 }(jQuery));
 
 /**
- *  Norwegian translation for bootstrap-datepicker
- **/
+ * Norwegian translation for bootstrap-datepicker
+ * George Gooding <george@nettsentrisk.no>
+ */
 ;(function($){
   $.fn.datepicker.dates['no'] = {
-    days: ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'],
-    daysShort: ['Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'],
-    daysMin: ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'],
-    months: ['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Desember'],
-    monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Des'],
-    today: 'I dag',
+    days: ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'],
+    daysShort: ['søn', 'man', 'tir', 'ons', 'tor', 'fre', 'lør'],
+    daysMin: ['sø', 'ma', 'ti', 'on', 'to', 'fr', 'lø'],
+    months: ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'vovember', 'desember'],
+    monthsShort: ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des'],
+    today: 'i dag',
+    monthsTitle: 'Måneder',
     clear: 'Nullstill',
     weekStart: 1,
     format: 'dd.mm.yyyy'
@@ -3286,11 +3302,11 @@
  */
 ;(function($){
 	$.fn.datepicker.dates['sv'] = {
-		days: ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"],
-		daysShort: ["Sön", "Mån", "Tis", "Ons", "Tor", "Fre", "Lör"],
-		daysMin: ["Sö", "Må", "Ti", "On", "To", "Fr", "Lö"],
-		months: ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"],
-		monthsShort: ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"],
+		days: ["söndag", "måndag", "tisdag", "onsdag", "torsdag", "fredag", "lördag"],
+		daysShort: ["sön", "mån", "tis", "ons", "tor", "fre", "lör"],
+		daysMin: ["sö", "må", "ti", "on", "to", "fr", "lö"],
+		months: ["januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september", "oktober", "november", "december"],
+		monthsShort: ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"],
 		today: "Idag",
 		format: "yyyy-mm-dd",
 		weekStart: 1,
@@ -3365,6 +3381,25 @@
 		months: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
 		monthsShort: ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."],
 		today: "วันนี้"
+	};
+}(jQuery));
+
+/**
+ * Turkmen translation for bootstrap-datepicker
+ * N'Bayramberdiyev <nbayramberdiyev@outlook.com>
+ */
+;(function($){
+	$.fn.datepicker.dates['tk'] = {
+		days: ["Ýekşenbe", "Duşenbe", "Sişenbe", "Çarşenbe", "Penşenbe", "Anna", "Şenbe"],
+		daysShort: ["Ýek", "Duş", "Siş", "Çar", "Pen", "Ann", "Şen"],
+		daysMin: ["Ýe", "Du", "Si", "Ça", "Pe", "An", "Şe"],
+		months: ["Ýanwar", "Fewral", "Mart", "Aprel", "Maý", "Iýun", "Iýul", "Awgust", "Sentýabr", "Oktýabr", "Noýabr", "Dekabr"],
+		monthsShort: ["Ýan", "Few", "Mar", "Apr", "Maý", "Iýn", "Iýl", "Awg", "Sen", "Okt", "Noý", "Dek"],
+		today: "Bu gün",
+		monthsTitle: "Aýlar",
+		clear: "Aýyr",
+		weekStart: 1,
+		format: "dd.mm.yyyy"
 	};
 }(jQuery));
 
